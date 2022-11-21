@@ -17,4 +17,9 @@ class Player
   def valid_marker?
     @marker == "X" || @marker == "O"
   end
+
+  def opposite_marker
+    return "O" if @marker == "X"
+    return "X" if @marker == "O"
+  end
 end

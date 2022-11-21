@@ -132,6 +132,7 @@ class TicTacBoardTest < MiniTest::Test
 
   def test_draw?
     assert_equal false, @tic_tac_board.draw?
+
     @tic_tac_board.board = [
       %w[X O X],
       %w[O X X],
@@ -139,5 +140,51 @@ class TicTacBoardTest < MiniTest::Test
       ]
 
     assert_equal true, @tic_tac_board.draw?
+  end
+
+  def test_game_on_going
+    assert_equal true, @tic_tac_board.on_going?
+
+    @tic_tac_board.board = [
+      %w[X O X],
+      %w[O X X],
+      %w[O X O]
+      ]
+    assert_equal false, @tic_tac_board.on_going?
+
+    @tic_tac_board.board = [
+      %w[X O X],
+      %w[O X X],
+      %w[O X _]
+    ]
+    assert_equal true, @tic_tac_board.on_going?
+
+    @tic_tac_board.board = [
+      %w[O O X],
+      %w[O X X],
+      %w[_ X X]
+    ]
+
+    assert_equal false, @tic_tac_board.on_going?
+  end
+
+  def test_any_empty_space
+    assert_equal true, @tic_tac_board.any_empty_space?
+
+    @tic_tac_board.board = [
+      %w[X O X],
+      %w[O X X],
+      %w[O X O]
+      ]
+
+      assert_equal false, @tic_tac_board.any_empty_space?
+
+    @tic_tac_board.board = [
+      %w[X O X],
+      %w[O X X],
+      %w[O X _]
+      ]
+
+      assert_equal true, @tic_tac_board.any_empty_space?
   end
 end

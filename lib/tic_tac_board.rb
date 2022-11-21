@@ -1,9 +1,12 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # This is class is the core of the game, it may be able to define winner,
 # choose the next player and validate moves.
+
+require "byebug"
+
 class TicTacBoard
-  attr_accessor :board, :players
+  attr_accessor :board, :players, :next_marker
   WINNER_SCNEARIOS = [
     #Row Scenarios
     [[0,0], [0,1], [0,2]],
@@ -30,6 +33,8 @@ class TicTacBoard
   def mark_position(player, coordinates)
     set_row_and_column(coordinates)
     @board[@row][@column] = player.marker
+
+    @next_marker = player.opposite_marker
   end
 
   def valid_position?(coordinates)
@@ -42,11 +47,15 @@ class TicTacBoard
   def next_player_to_make_a_move
     return player_with_x if empty_board? 
 
-    total_moves_for_x >= total_moves_for_o ? player_with_o : player_with_x
+    @next_marker == "O" ? player_with_o : player_with_x
   end
 
   def empty_board?
     @board.all?{ |row| row.all?("_") }
+  end
+
+  def any_empty_space?
+    @board.any?{ |row| row.any?("_") }
   end
 
   def player_with_x
@@ -84,7 +93,22 @@ class TicTacBoard
   end
 
   def draw?
-    !empty_board? && !x_winner? && !o_winner?
+    !any_empty_space? && !empty_board? && !x_winner? && !o_winner?
+  end
+
+  def on_going?
+    return true if empty_board?
+
+    any_empty_space? && !draw? && !x_winner? && !o_winner? 
+  end
+
+  def draw_board
+    draw = ""
+    draw << "#{@board[0][0]} | #{@board[0][1]} | #{@board[0][2]} \n"
+    draw << "#{@board[1][0]} | #{@board[1][1]} | #{@board[1][2]} \n"
+    draw << "#{@board[2][0]} | #{@board[2][1]} | #{@board[2][2]} \n"
+
+    draw
   end
 
   private
