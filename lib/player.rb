@@ -3,6 +3,8 @@
 # This class is an abstratction of a tic-tac-toe player
 # it contains information and validations to create a regular player
 class Player
+  attr_accessor :marker
+
   def initialize(marker)
     @marker = marker.upcase
     raise "Marker should be X or O" unless valid_marker?
