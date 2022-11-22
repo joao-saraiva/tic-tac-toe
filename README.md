@@ -5,7 +5,9 @@
 # How to Play
 
   Simply use this command at your terminal:
+  ```
   $ ruby lib/game.rb
+  ```
 
   You need to select between X or O, X play first, after the game is finished tou can choose (1) to play again
   and 2 to end the application
