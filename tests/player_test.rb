@@ -5,8 +5,8 @@ require_relative '../lib/player'
 
 class PlayerTest < MiniTest::Test
   def setup
-    @player_with_x = Player.new("X")
-    @player_with_o = Player.new("O")
+    @player_with_x = Player.new('X')
+    @player_with_o = Player.new('O')
   end
 
   def test_player_is_the_first_to_play
@@ -23,11 +23,11 @@ class PlayerTest < MiniTest::Test
   end
 
   def test_player_cant_be_initialized_with_invalid_marker
-    assert_raises(StandardError, "Marker should be X or O") { Player.new("a") }
+    assert_raises(StandardError, 'Marker should be X or O') { Player.new('a') }
   end
 
   def test_player_opposite_marker
-    assert_equal "X", @player_with_o.opposite_marker
-    assert_equal "O", @player_with_x.opposite_marker
+    assert_equal 'X', @player_with_o.opposite_marker
+    assert_equal 'O', @player_with_x.opposite_marker
   end
 end

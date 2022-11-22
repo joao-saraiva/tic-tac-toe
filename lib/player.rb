@@ -7,19 +7,19 @@ class Player
 
   def initialize(marker)
     @marker = marker.upcase
-    raise "Marker should be X or O" unless valid_marker?
+    raise 'Marker should be X or O' unless valid_marker?
   end
 
   def first_to_play?
-    @marker == "X"
+    @marker == 'X'
   end
 
   def valid_marker?
-    @marker == "X" || @marker == "O"
+    @marker == 'X' || @marker == 'O'
   end
 
   def opposite_marker
-    return "O" if @marker == "X"
-    return "X" if @marker == "O"
+    return 'O' if @marker == 'X'
+    return 'X' if @marker == 'O'
   end
 end
